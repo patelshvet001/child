@@ -1,0 +1,49 @@
+{% extends 'hospital/base.html' %}
+{% block body %}
+{% load static %}
+
+<div class="container-fluid py-5 bg-header">
+            <div class="row py-5 text-center">
+                <h1 class="display-4 text-white animated zoomIn">About Us</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- About Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">                
+                <div class="col-lg-5" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="{% static 'img/g.jpg' %}" style="object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="section-title position-relative pb-3 mb-5">
+                        <h5 class="fw-bold text-primary text-uppercase">About Us</h5>
+                        <h1 class="mb-0">Why your child should get vaccinated.</h1>
+                    </div>
+                    <p class="mb-4">Vaccines can prevent common diseases that used to seriously harm or even kill infants, children, and adults. Without vaccines, your child is at risk of becoming seriously ill or even dying from childhood diseases such as measles and whooping cough. Any time you delay a vaccine, you’re increasing your child’s vulnerability to disease.</p>
+                    <div class="row g-0 mb-3">
+                        <div class="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>New Born</h5>
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>1 to 6 Month</h5>
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>1 to 5 Year</h5>
+                        </div>
+                        <div class="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>6 to 9 Month</h5>
+                            <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>9 to 12 Month</h5>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+  
+
+  {% endblock body %}

@@ -1,0 +1,80 @@
+
+{% extends 'hospital/base.html' %}
+
+{% load static %}
+
+{% block css  %}
+
+
+.userimage{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+}
+.pst{
+  width:330px;
+  height:220px;
+  
+} 
+
+.likes{
+  border-right: 1px solid black;
+}
+.comment{
+  border-right: 1px solid black;
+}
+ .mypost i
+     {
+      margin: 10px;
+      color:#035715;
+     }
+     .mypost a
+     {
+      text-decoration:  none;
+      color:black;
+     }
+{% endblock css  %}
+
+
+{% block body  %}
+<div class="text-center mb-5">
+  <h1 class="font-weight-bold " style="letter-spacing: 5px;color:#035715">MY PROFILE</h1>
+</div>
+
+<div class="container my-4">
+  
+<div class="media">
+  <div class="media-left media-top mr-1" >
+   
+      <img class="media-object userimage" src="{{user_obj.profile_image.url}}" alt="..." style="width:130px">
+      
+   
+
+  </div>
+  
+  <div class="media-body ml-4">
+    <h4 class="media-heading">
+      {{user.username}}
+      {% if user == request.user %}
+      <a href="/hospital/edit_profile/{{user.id}}/" class="btn btn-outline-primary">Edit</a>
+      {% endif %}
+    </h4>
+
+      
+        
+       
+   
+  </div>
+</div>
+<hr>
+
+ 
+
+
+</div>
+
+
+
+
+
+{% endblock body  %}

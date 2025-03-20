@@ -1,0 +1,37 @@
+from django.urls import path
+from . import views
+from django.contrib.auth import views as auth_views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('about/', views.about, name='about'),
+    path('appointment/', views.bookappointment, name='appointment'),
+    path('my_appointments/', views.myappointment, name='myappointment'),
+    path('contact/', views.contact_us, name='contact'),
+    path('faq/', views.Faq_data, name='faqs'),
+    path('service/', views.service, name='service'),
+    path('register/', views.register, name='register'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('profile/<int:id>/', views.userprofile, name='userprofile'),
+    path('edit_profile/<int:id>/', views.editprofile, name='editprofile'),
+    path('handle_edit/<int:id>', views.handle_edit, name='handle_edit'),
+    path('password-reset/', views.ResetPasswordView.as_view(), name='password_reset'),
+    path('password-reset-confirm/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),
+         name='password_reset_confirm'),
+    path('password-reset-complete/',
+         auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
+         name='password_reset_complete'),
+    path('change-password/', views.change_password, name='change_password'),
+    path('vaccine-search/', views.vaccine_search, name='vaccine_search'),
+    path('search-data/', views.search_data, name='search_data'),
+    path('view-certificate/<int:appointment_id>/', views.view_certificate_details, name='view_certificate_details'),
+    path('approve_appointment/<int:appointment_id>/', views.approve_appointment, name='approve_appointment'),
+    path('cancel_appointment/<int:appointment_id>/', views.cancel_appointment, name='cancel_appointment'),
+    path('complete_appointment/<int:appointment_id>/', views.complete_appointment, name='complete_appointment'),
+    path('generate_certificate/<int:appointment_id>/', views.generate_certificate, name='generate_certificate'),
+    path('appointment_slip/<int:appointment_id>/', views.appointment_slip, name='appointment_slip'),
+    path('download_appointment_slip/<int:appointment_id>/', views.download_appointment_slip, name='download_appointment_slip'),
+    path('change_status/<int:appointment_id>/<str:new_status>/', views.change_status, name='change_status'),
+]

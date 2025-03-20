@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white text-center">
+            <h2>Appointment Slip</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <!-- Patient Information -->
+                    <div class="mb-4">
+                        <h4 class="text-primary border-bottom pb-2">PATIENT INFORMATION</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Patient Name:</strong> {{ child_name }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Appointment ID:</strong> {{ appointment.aid }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appointment Details -->
+                    <div class="mb-4">
+                        <h4 class="text-primary border-bottom pb-2">APPOINTMENT DETAILS</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Vaccine Name:</strong> {{ vaccine_name }}</p>
+                                <p><strong>Price:</strong> ₹{{ price }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Status:</strong> <span class="badge bg-success">{{ status }}</span></p>
+                                <p><strong>Appointment Date:</strong> {{ appointment_date }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hospital Information -->
+                    <div class="mb-4">
+                        <h4 class="text-primary border-bottom pb-2">HOSPITAL INFORMATION</h4>
+                        <p><strong>Hospital Name:</strong> {{ hospital_name }}</p>
+                    </div>
+
+                    <!-- Important Notes -->
+                    <div class="alert alert-info">
+                        <h5 class="alert-heading">Important Notes:</h5>
+                        <ul class="mb-0">
+                            <li>Please arrive 15 minutes before your scheduled appointment time.</li>
+                            <li>Bring your child's previous vaccination records if any.</li>
+                            <li>Make sure your child is healthy on the day of vaccination.</li>
+                            <li>Keep this appointment slip with you for reference.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Download Button - Only show for Approved status -->
+                    {% if status == 'Approved' %}
+                    <div class="text-center mt-4">
+                        <a href="{% url 'download_appointment_slip' appointment.aid %}" class="btn btn-primary">
+                            <i class="fas fa-download"></i> Download Appointment Slip
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @media print {
+        .btn {
+            display: none;
+        }
+        .card {
+            border: none !important;
+            box-shadow: none !important;
+        }
+        .card-header {
+            background-color: #f8f9fa !important;
+            color: #000 !important;
+            border-bottom: 2px solid #dee2e6;
+        }
+        .text-primary {
+            color: #000 !important;
+        }
+        .badge {
+            border: 1px solid #000;
+            color: #000;
+            background-color: #fff !important;
+        }
+    }
+</style>
+{% endblock %} 

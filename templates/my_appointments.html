@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">My Appointments</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th style="width: 5%">No.</th>
+                    <th style="width: 15%">Hospital</th>
+                    <th style="width: 15%">Vaccine</th>
+                    <th style="width: 15%">Date & Time</th>
+                    <th style="width: 10%">Price</th>
+                    <th style="width: 10%">Status</th>
+                    <th style="width: 20%">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                <tr class="text-center">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ appointment.hospital.first_name }}</td>
+                    <td>{{ appointment.vac.vname }}</td>
+                    <td>{{ appointment.datetime|date:"d M Y, h:i A" }}</td>
+                    <td>Rs. {{ appointment.vac.vprice }}</td>
+                    <td>
+                        <span class="badge {% if appointment.status == 'Pending' %}badge-warning{% elif appointment.status == 'Approved' %}badge-success{% elif appointment.status == 'Completed' %}badge-info{% else %}badge-danger{% endif %}">
+                            {{ appointment.status }}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            {% if appointment.status == 'Approved' %}
+                                <a href="{% url 'appointment_slip' appointment.aid %}" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-file-alt"></i> Appointment Slip
+                                </a>
+                            {% elif appointment.status == 'Completed' %}
+                                <a href="{% url 'generate_certificate' appointment.aid %}" class="btn btn-success btn-sm">
+                                    <i class="fas fa-file-pdf"></i> Download Certificate
+                                </a>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center">No appointments found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock body %}

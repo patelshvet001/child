@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+
+<div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="w-100" src="{% static 'img/carousel-1.jpg' %}" alt="Image">
+            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                <div class="p-3" style="max-width: 900px;">
+                    <h1 class="display-4 text-white mb-md-4 animated zoomIn">Vaccinations: Your Child’s First Protection </h1>
+                    <a href="/appointment/" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Book Appointment</a>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="w-100" src="{% static 'img/carousel-2.png' %}" alt="Image">
+            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                <div class="p-3" style="max-width: 900px;">
+                    <h1 class="display-4 text-white mb-md-4 animated zoomIn">Vaccination Schedule and the Diseases They Protect Against</h1>
+                    <a href="/appointment/" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Book Appointment</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+</div>
+<!-- Navbar & Carousel End -->
+
+<!-- Facts Start -->
+<div class="container-fluid facts py-5 pt-lg-0">
+<div class="container pt-lg-0">
+    <div class="row gx-0">
+        <div class="col-lg-6 col-md-6 col-sm-12 wow zoomIn" data-wow-delay="0.1s">
+            <div class="bg-primary shadow d-flex align-items-center justify-content-center p-4" style="height: 150px;">
+                <div class="rounded mb-2">
+                    <img src="{% static 'img/img2.png' %}" alt="" title=""  />
+                </div>
+                <div class="ps-5">
+                    <h5 class="text-white mb-0">Total Vaccination Doses</h5>
+                    <h1 class="text-white mb-0" data-toggle="counter-up">20,552</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 wow zoomIn" data-wow-delay="0.3s">
+            <div class="bg-light shadow d-flex align-items-center justify-content-center p-4" style="height: 150px;">
+                <div class="rounded mb-2">
+                    <img src="{% static 'img/img1.png' %}" alt="" title=""  />
+                </div>
+                <div class="ps-5">
+                    <h5 class="text-primary mb-0">Vaccinations Done Today</h5>
+                    <h1 class="mb-0" data-toggle="counter-up">1008</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Facts Start -->
+
+
+<!-- About Start -->
+<div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="section-title position-relative pb-3 mb-5">
+                <h5 class="fw-bold text-primary text-uppercase">About Us</h5>
+                <h1 class="mb-0">Why your child should get vaccinated.</h1>
+            </div>
+            <p class="mb-4">Vaccines can prevent common diseases that used to seriously harm or even kill infants, children, and adults. Without vaccines, your child is at risk of becoming seriously ill or even dying from childhood diseases such as measles and whooping cough. Any time you delay a vaccine, you’re increasing your child’s vulnerability to disease.</p>
+            <div class="row g-0 mb-3">
+                <div class="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
+                    <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>New Born</h5>
+                    <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>1 to 6 Month</h5>
+                    <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>1 to 5 Year</h5>
+                </div>
+                <div class="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
+                    <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>6 to 9 Month</h5>
+                    <h5 class="mb-3"><i class="fa fa-check text-primary me-3"></i>9 to 12 Month</h5>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-lg-5" style="min-height: 500px;">
+            <div class="position-relative h-100">
+                <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="{% static  'img/img_1.jpg' %}" style="object-fit: cover;">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- About End -->
+
+<!-- Service Start -->
+<div class="container-fluid py-5 wow fadeInUp services_steps" data-wow-delay="0.1s">
+<div class="container py-5">
+    <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+        <h5 class="fw-bold text-primary text-uppercase">Our Services</h5>
+        <h1 class="mb-0">Get Vaccinated in 3 Easy Steps</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
+            <div class="position-relative bg-primary rounded-3 h-100 d-flex flex-column align-items-center text-center p-3 img_size">
+                <h3 class="text-white mb-3">Step 1</h3>
+                <div class="img_inside_height">
+                    <img src="{% static  'img/book_appointment.png' %}" alt="" title=""  />
+                </div>
+                <p class="text-white mb-3">Book an Appointment and Walk into Vaccination Center</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
+            <div class="position-relative bg-primary rounded-3 h-100 d-flex flex-column align-items-center text-center p-3 img_size">
+                <h3 class="text-white mb-3">Step 2</h3>
+                <div class="img_inside_height">
+                    <img src="{% static 'img/get_vaccinated.jpg' %}" alt="" title=""  />
+                </div>
+                <p class="text-white mb-3">Get Your Vaccination Safely at the Time of Your Appointment</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
+            <div class="position-relative bg-primary rounded-3 h-100 d-flex flex-column align-items-center text-center p-3 img_size">
+                <h3 class="text-white mb-3">Step 3</h3>
+                <div class="img_inside_height">
+                    <img src="{% static 'img/certificate.jpg' %}" alt="" title=""  />
+                </div>
+                <p class="text-white mb-3">Download Your Vaccination Certificate</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Service End -->
+
+<!-- start child vaccination -->
+<div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+<div class="container py-5">
+    <div class="row g-5">
+        <div class="col-lg-5" style="min-height: 500px;">
+            <div class="position-relative h-100">
+                <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="{% static  'img/child_vaccinated.jpg' %}" style="object-fit: cover;">
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="section-title position-relative pb-3 mb-5">
+                <h5 class="fw-bold text-primary text-uppercase">Vaccination</h5>
+                <h1 class="mb-0">Children Vaccinated </h1>
+            </div>
+            <p class="mb-4"><i class="fa fa-check text-primary me-3"></i>Covovax vaccine is now available for Children of the age group 12+ yrs in Private Vaccination Center. The time span between first and second dose of Covovax is 21 days. Children can be administered with the second dose of Covovax within a month.</p>
+            <p class="mb-4"><i class="fa fa-check text-primary me-3"></i>Children of the age group 12-14 yrs are now eligible for the Corbevax vaccine in Government Vaccination Center and in Private Vaccination Center 12+ yrs. The period between a first and second dose of Corbevax is 28 days.</p>
+            <p class="mb-4"><i class="fa fa-check text-primary me-3"></i>Covaxin is available for Children of the age group of 15+ yrs in both Government and Private Vaccination Center. Children must be completed 4 to 6 weeks after administration of the first dose of Covaxin to take the second dose of Covaxin. Both online and walk-in are available.</p>
+            
+        </div>                
+    </div>
+</div>
+</div>
+<!-- start child vaccination -->
+
+<!-- start date correction -->
+<div class="container-fluid py-5 wow fadeInUp services_steps" data-wow-delay="0.1s">
+<div class="container py-5">
+    <div class="row g-5">
+        <div class="col-lg-7">
+            <div class="section-title position-relative pb-3 mb-5">
+                <h5 class="fw-bold text-primary text-uppercase">Date Correction</h5>
+                <h1 class="mb-0">Vaccination Date Correction </h1>
+            </div>
+            <p class="mb-4"><i class="fa fa-check text-primary me-3"></i>If the date printed on your vaccination certificate differs from the actual date of vaccine administration, you may raise a request for correction of the same by submitting a valid proof of correct vaccination date.</p>
+            
+        </div> 
+        <div class="col-lg-5" style="min-height: 300px;">
+            <div class="position-relative h-100">
+                <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="{% static 'img/date_update.jpg' %}" style="object-fit: contain;">
+            </div>
+        </div>                               
+    </div>
+</div>
+</div>
+<!-- start date correction -->
+
+
+<!-- Team Start -->
+<div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+<div class="container py-5">
+    <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
+        <h5 class="fw-bold text-primary text-uppercase">Gallery</h5>
+        <h1 class="mb-0">Vaccination For Kids</h1>
+    </div>
+    <div class="row g-5">
+        <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
+            <div class="team-item bg-light rounded overflow-hidden">
+                <div class="team-img position-relative overflow-hidden">
+                    <img class="img-fluid w-100" src="{% static  'img/1_img.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 wow slideInUp" data-wow-delay="0.6s">
+            <div class="team-item bg-light rounded overflow-hidden">
+                <div class="team-img position-relative overflow-hidden">
+                    <img class="img-fluid w-100" src="{% static 'img/2_img.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 wow slideInUp" data-wow-delay="0.9s">
+            <div class="team-item bg-light rounded overflow-hidden">
+                <div class="team-img position-relative overflow-hidden">
+                    <img class="img-fluid w-100" src="{% static  'img/3_img.webp' %}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
+            <div class="team-item bg-light rounded overflow-hidden">
+                <div class="team-img position-relative overflow-hidden">
+                    <img class="img-fluid w-100" src="{% static  'img/5_imgs.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 wow slideInUp" data-wow-delay="0.6s">
+            <div class="team-item bg-light rounded overflow-hidden">
+                <div class="team-img position-relative overflow-hidden">
+                    <img class="img-fluid w-100" src="{% static  'img/5_img.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 wow slideInUp" data-wow-delay="0.9s">
+            <div class="team-item bg-light rounded overflow-hidden">
+                <div class="team-img position-relative overflow-hidden">
+                    <img class="img-fluid w-100" src="{% static  'img/6_img.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Team End -->
+
+
+
+{% endblock body %}

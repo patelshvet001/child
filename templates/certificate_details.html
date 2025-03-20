@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white text-center">
+            <h2>Vaccination Certificate Details</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <!-- Certificate ID -->
+                    <div class="text-end mb-3">
+                        <strong>Certificate ID:</strong> {{ certificate_id }}
+                    </div>
+
+                    <!-- Personal Information -->
+                    <div class="mb-4">
+                        <h4 class="text-primary border-bottom pb-2">PERSONAL INFORMATION</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Child's Name:</strong> {{ child_name }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Date of Birth:</strong> {{ birth_date }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vaccination Details -->
+                    <div class="mb-4">
+                        <h4 class="text-primary border-bottom pb-2">VACCINATION DETAILS</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Vaccine Name:</strong> {{ vaccine_name }}</p>
+                                <p><strong>Price:</strong> {{ price }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Status:</strong> {{ status }}</p>
+                                <p><strong>Appointment Date:</strong> {{ appointment_date }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hospital Information -->
+                    <div class="mb-4">
+                        <h4 class="text-primary border-bottom pb-2">HOSPITAL INFORMATION</h4>
+                        <p><strong>Hospital Name:</strong> {{ hospital_name }}</p>
+                        <p><strong>Address:</strong> {{ hospital_address }}</p>
+                    </div>
+
+                    <!-- Issue Date -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <p><strong>Issue Date:</strong> {{ issue_date }}</p>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <p><strong>Authorized Signature</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- Download Button -->
+                    <div class="text-center mt-4">
+                        <a href="{% url 'generate_certificate' appointment.aid %}" class="btn btn-primary">
+                            Download PDF Certificate
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

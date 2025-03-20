@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+
+ <div class="container-fluid py-5 bg-header">
+            <div class="row py-5 text-center">
+                <h1 class="display-4 text-white animated zoomIn">Vaccination</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Full Screen Search Start -->
+    <div class="modal fade" id="searchModal" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content" style="background: rgba(9, 30, 62, .7);">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn bg-white btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex align-items-center justify-content-center">
+                    <div class="input-group" style="max-width: 600px;">
+                        <input type="text" class="form-control bg-transparent border-primary p-3" placeholder="Type search keyword">
+                        <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Full Screen Search End -->
+    
+    <!-- Service Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-7">
+                    <div class="section-title position-relative pb-3 mb-5">
+                        <h5 class="fw-bold text-primary text-uppercase">Services</h5>
+                        <h1 class="mb-0">Baby Immunization Schedule/ vaccination chart
+                        </h1>
+                    </div>
+                    <p class="mb-4">Right from the time of birth, till the age of 12, your child will be vulnerable to a host of diseases, viruses, and bacteria. At such a tender age, the body of your child may not have the required immune system to protect them from these communicable diseases. In an event, where your child may contract a disease or virus, the consequences may be dire. Certain diseases such as diphtheria, tetanus, whooping cough and HPV still exist today, and can still be easily be transmitted from one individual to another. In many parts of the world, vaccine-preventable diseases are still common, and there is every chance of your child contracting them.</p>
+                    <p class="mb-4">To prevent such an occurrence, the ideal solution is to protect your child through vaccination. Vaccinations ensure that your child is immune to certain communicable diseases, thus preventing them from contracting it or even suffering from the effects of it. In the occasion where they come into contact with an infected individual, the vaccinated child will not be affected by the serious effects or complications.</p>
+                </div>
+                <div class="col-lg-5" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="{% static 'img/images.jpg' %}" style="object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+
+    <!-- Baby Immunization Schedule/ vaccination chart table -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="section-title text-center position-relative pb-3 mb-5 mx-auto">
+                <h1 class="mb-0">Baby Immunization Schedule Table (based on IAPCOI recommendations) </h1>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.3s">
+                    <table>
+                    <tr>
+                        <th>Birth</th>
+                        <th>BCG, Hep B1, OPV</th>
+                    </tr>
+                    <tr>
+                        <td>6 weeks</td>
+                        <td> DTwP /DTaP1, Hib-1, IPV-1, Hep B2, PCV 1,Rota-1 </td>
+                    </tr>
+                    <tr>
+                        <td>10 weeks</td>
+                        <td>DTwP /DTaP2, Hib-2, IPV-2, Hep B3, PCV 2, Rota-2</td>
+                    </tr>
+                    <tr>
+                        <td>14Weeks</td>
+                        <td>DTwP /DTaP3, Hib-3, IPV-3, Hep B4, PCV 3, Rota-3*</td>
+                    </tr>
+                    <tr>
+                        <td>6 Months</td>
+                        <td>Influenza-1
+                    </tr>
+                    <tr>
+                        <td>7 Months</td>
+                        <td>Influenza -2</td>
+                    </tr>
+                    <tr>
+                        <td>6 - 9 Months</td>
+                        <td>Typhoid Conjugate Vaccine</td>
+                    </tr>
+                    <tr>
+                        <td>9 Months</td>
+                        <td>MMR 1 (Mumps, measles, Rubella)</td>
+                    </tr>
+                    <tr>
+                        <td>12 Months</td>
+                        <td>Hepatitis A- 1</td>
+                    </tr>
+                    <tr>
+                        <td>12 - 15 Months</td>
+                        <td>PCV Booster</td>
+                    </tr>
+                    <tr>
+                        <td>15 Months</td>
+                        <td>MMR 2, Varicella</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>16 – 18 Months</td>
+                        <td>DTwP /DTaP, Hib, IPV</td>
+                    </tr>
+
+                    <tr>
+                        <td>18 – 19 Months</td>
+                        <td>Hepatitis A- 2**, Varicella 2</td>
+                    </tr>
+
+                    <tr>
+                        <td>4 – 6 years</td>
+                        <td>DTwP /DTaP, IPV, MMR 3</td>
+                    </tr>
+                    <tr>
+                        <td>9 – 15years (Girls)</td>
+                        <td>HPV (2 doses)</td>
+                    </tr>
+                    <tr>
+                        <td>10 – 12 Years</td>
+                        <td>Tdap/ Td</td>
+                    </tr>
+                    <tr>
+                        <td>2nd, 3rd, 4th and 5th Year</td>
+                        <td>Annual Influenza Vaccine</td>
+                    </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Baby Immunization Schedule/ vaccination chart table --> 
+
+   
+
+{% endblock body %}

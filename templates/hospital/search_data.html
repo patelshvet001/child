@@ -1,0 +1,335 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block body %}
+<!-- Include Required CSS and JS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+<style>
+.search-container {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.search-title {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #34495e;
+}
+
+.form-control, .form-select {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52,152,219,0.25);
+}
+
+.btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+.btn-secondary {
+    background-color: #95a5a6;
+    border-color: #95a5a6;
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d;
+    border-color: #7f8c8d;
+}
+
+.table {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+}
+
+.table thead {
+    background-color: #3498db;
+    color: white;
+}
+
+.table th {
+    font-weight: 600;
+    padding: 1rem;
+}
+
+.table td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.stats-card {
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+}
+
+.stats-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.stats-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.export-buttons .btn {
+    margin-left: 0.5rem;
+}
+</style>
+
+<!-- Main Content -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="search-container">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="search-title mb-0">Vaccination Data Search</h2>
+                <div class="export-buttons">
+                    <button class="btn btn-success" onclick="exportToExcel()">
+                        <i class="fas fa-file-excel me-2"></i>Export to Excel
+                    </button>
+                    <button class="btn btn-danger" onclick="exportToPDF()">
+                        <i class="fas fa-file-pdf me-2"></i>Export to PDF
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Search Form -->
+            <form method="GET" class="mb-4">
+                <div class="row g-3">
+                    <!-- Basic Search -->
+                    <div class="col-md-4">
+                        <label class="form-label">Patient Name</label>
+                        <input type="text" name="search" class="form-control" placeholder="Search by patient name..." value="{{ request.GET.search }}">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Vaccine Type</label>
+                        <select name="vaccine_type" class="form-select">
+                            <option value="">All Vaccine Types</option>
+                            {% for vaccine in vaccines %}
+                            <option value="{{ vaccine.vid }}" {% if request.GET.vaccine_type == vaccine.vid|stringformat:"s" %}selected{% endif %}>
+                                {{ vaccine.vname }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Status</label>
+                        <select name="status" class="form-select">
+                            <option value="">All Status</option>
+                            <option value="Completed" {% if request.GET.status == 'Completed' %}selected{% endif %}>Completed</option>
+                            <option value="Approved" {% if request.GET.status == 'Approved' %}selected{% endif %}>Approved</option>
+                            <option value="Pending" {% if request.GET.status == 'Pending' %}selected{% endif %}>Pending</option>
+                            <option value="Cancelled" {% if request.GET.status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                        </select>
+                    </div>
+
+                    <!-- Advanced Search -->
+                    <div class="col-md-4">
+                        <label class="form-label">Quick Date Range</label>
+                        <select name="date_range" class="form-select">
+                            <option value="">All Time</option>
+                            <option value="today" {% if request.GET.date_range == 'today' %}selected{% endif %}>Today</option>
+                            <option value="week" {% if request.GET.date_range == 'week' %}selected{% endif %}>This Week</option>
+                            <option value="month" {% if request.GET.date_range == 'month' %}selected{% endif %}>This Month</option>
+                            <option value="year" {% if request.GET.date_range == 'year' %}selected{% endif %}>This Year</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Sort By</label>
+                        <select name="sort_by" class="form-select">
+                            <option value="date_desc" {% if request.GET.sort_by == 'date_desc' %}selected{% endif %}>Date (Newest First)</option>
+                            <option value="date_asc" {% if request.GET.sort_by == 'date_asc' %}selected{% endif %}>Date (Oldest First)</option>
+                            <option value="name_asc" {% if request.GET.sort_by == 'name_asc' %}selected{% endif %}>Patient Name (A-Z)</option>
+                        </select>
+                    </div>
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search me-2"></i>Search
+                        </button>
+                        <a href="{% url 'search_data' %}" class="btn btn-secondary ms-2">
+                            <i class="fas fa-undo me-2"></i>Reset
+                        </a>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Results Section -->
+            {% if appointments %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>Vaccine Type</th>
+                            <th>Appointment Date</th>
+                            <th>Duration</th>
+                            <th>Status</th>
+                            <th>Hospital</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appointment in appointments %}
+                        <tr>
+                            <td>{{ appointment.user.first_name }} {{ appointment.user.last_name }}</td>
+                            <td>{{ appointment.vac.vname }}</td>
+                            <td>{{ appointment.datetime|date:"d M Y" }}</td>
+                            <td>{{ appointment.vac.vdiscription }}</td>
+                            <td>
+                                <span class="badge {% if appointment.status == 'Completed' %}bg-success
+                                {% elif appointment.status == 'Approved' %}bg-info
+                                {% elif appointment.status == 'Pending' %}bg-warning
+                                {% else %}bg-danger{% endif %}">
+                                    {{ appointment.status }}
+                                </span>
+                            </td>
+                            <td>{{ appointment.hospital.first_name }}</td>
+                            <td>₹{{ appointment.vac.vprice }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="row mt-4">
+                <div class="col-md-3">
+                    <div class="stats-card bg-primary text-white">
+                        <h5 class="stats-title">Total Appointments</h5>
+                        <div class="stats-number">{{ total_appointments }}</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card bg-success text-white">
+                        <h5 class="stats-title">Completed</h5>
+                        <div class="stats-number">{{ completed_appointments }}</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card bg-warning text-white">
+                        <h5 class="stats-title">Pending</h5>
+                        <div class="stats-number">{{ pending_appointments }}</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card bg-info text-white">
+                        <h5 class="stats-title">Total Revenue</h5>
+                        <div class="stats-number">₹{{ total_revenue }}</div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="alert alert-info mt-4">
+                <i class="fas fa-info-circle me-2"></i>No vaccination records found matching your search criteria.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // Export functions
+    window.exportToExcel = function() {
+        const table = document.querySelector('.table');
+        const ws = XLSX.utils.table_to_sheet(table);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Vaccination Data');
+        const filename = `vaccination_data_${new Date().toISOString().slice(0,10)}.xlsx`;
+        XLSX.writeFile(wb, filename);
+    }
+
+    window.exportToPDF = function() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        doc.setFontSize(16);
+        doc.text('Vaccination Data Report', 15, 15);
+        
+        doc.setFontSize(12);
+        doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 15, 25);
+        
+        const table = document.querySelector('.table');
+        const rows = Array.from(table.querySelectorAll('tr'));
+        
+        let yPos = 35;
+        const cellWidth = 25;
+        
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'bold');
+        const headers = Array.from(rows[0].querySelectorAll('th')).map(th => th.textContent);
+        headers.forEach((header, index) => {
+            doc.text(header, 15 + (index * cellWidth), yPos);
+        });
+        
+        doc.setFont(undefined, 'normal');
+        rows.slice(1).forEach(row => {
+            yPos += 10;
+            if (yPos >= 280) {
+                doc.addPage();
+                yPos = 20;
+            }
+            const cells = Array.from(row.querySelectorAll('td')).map(td => td.textContent.trim());
+            cells.forEach((cell, index) => {
+                doc.text(cell, 15 + (index * cellWidth), yPos);
+            });
+        });
+        
+        const filename = `vaccination_data_${new Date().toISOString().slice(0,10)}.pdf`;
+        doc.save(filename);
+    }
+});
+</script>
+{% endblock %} 

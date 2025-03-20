@@ -1,0 +1,195 @@
+{% extends 'hospital/base.html' %}
+{% load static %}
+
+{% block body %}
+
+<style>
+    /* Switch button styling */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+
+    .status-badge {
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-weight: bold;
+    }
+
+    .status-pending {
+        background-color: #ffeeba;
+        color: #856404;
+    }
+
+    .status-approved {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .status-cancelled {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+</style>
+
+<div class="container mt-4">
+    <h2 class="mb-4">Hospital Appointments</h2>
+    
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Vaccine</th>
+                    <th>Date & Time</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.user.first_name }} {{ appointment.user.last_name }}</td>
+                    <td>{{ appointment.vac.vname }}</td>
+                    <td>{{ appointment.datetime }}</td>
+                    <td>
+                        <span class="badge {% if appointment.status == 'Completed' %}bg-success
+                        {% elif appointment.status == 'Approved' %}bg-info
+                        {% elif appointment.status == 'Pending' %}bg-warning
+                        {% else %}bg-danger{% endif %}">
+                            {{ appointment.status }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if request.user.is_superuser %}
+                            <!-- Admin Controls -->
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                                    Change Status
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'change_status' appointment.aid 'Pending' %}">Set as Pending</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'change_status' appointment.aid 'Approved' %}">Set as Approved</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'change_status' appointment.aid 'Completed' %}">Set as Completed</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'change_status' appointment.aid 'Cancelled' %}">Set as Cancelled</a></li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <!-- Hospital Controls -->
+                            {% if appointment.status == 'Pending' %}
+                            <a href="{% url 'approve_appointment' appointment.aid %}" class="btn btn-success btn-sm">
+                                <i class="fas fa-check"></i> Approve
+                            </a>
+                            {% elif appointment.status == 'Approved' %}
+                            <a href="{% url 'complete_appointment' appointment.aid %}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-check-circle"></i> Complete
+                            </a>
+                            {% endif %}
+                            {% if appointment.status == 'Completed' %}
+                            <a href="{% url 'generate_certificate' appointment.aid %}" class="btn btn-info btn-sm">
+                                <i class="fas fa-certificate"></i> View Certificate
+                            </a>
+                            {% endif %}
+                        {% endif %}
+                        <a href="{% url 'cancel_appointment' appointment.aid %}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function updateStatus(checkbox, appointmentId) {
+        const status = checkbox.checked ? 'Approved' : 'Pending';
+        
+        // Send AJAX request to update status
+        fetch(`/hospital/update_status/${appointmentId}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({ status: status })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update the status badge
+                const statusCell = checkbox.closest('tr').querySelector('.status-badge');
+                statusCell.className = `status-badge status-${status.toLowerCase()}`;
+                statusCell.textContent = status;
+            } else {
+                // Revert the checkbox if update failed
+                checkbox.checked = !checkbox.checked;
+                alert('Failed to update status. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            checkbox.checked = !checkbox.checked;
+            alert('Failed to update status. Please try again.');
+        });
+    }
+
+    // Function to get CSRF token from cookies
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+
+{% endblock %}
