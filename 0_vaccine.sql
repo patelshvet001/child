@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2025 at 12:15 PM
+-- Generation Time: Feb 21, 2025 at 04:25 PM
 -- Server version: 11.6.2-MariaDB
 -- PHP Version: 8.0.30
 
@@ -140,13 +140,13 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(6, 'pbkdf2_sha256$870000$PFD1OwtTwpjjIRCS6s7Nlk$xk5wmtlXj5/BOTm/ovHizhp3CIi5HtMBMi2ZVUb4x1I=', '2025-03-19 11:25:25.493178', 1, 'admin', '', '', 'admin@gmail.com', 1, 1, '2024-02-11 04:54:48.000000'),
+(6, 'pbkdf2_sha256$870000$PFD1OwtTwpjjIRCS6s7Nlk$xk5wmtlXj5/BOTm/ovHizhp3CIi5HtMBMi2ZVUb4x1I=', '2025-02-21 09:50:57.000000', 1, 'admin', '', '', 'admin@gmail.com', 1, 1, '2024-02-11 04:54:48.000000'),
 (8, 'pbkdf2_sha256$600000$PHpbEIs0vAPgtLIdr80bv1$GoHVsBRvleWW+yqnhUCnt2T1V9V/Ig4j+TL6zK8lhj4=', '2024-02-11 10:43:51.458283', 0, 'John', 'John', 'Carter', 'john@gmail.com', 0, 1, '2024-02-11 09:26:49.480945'),
-(10, 'pbkdf2_sha256$870000$0WMxdOzHmBa7gtY8hBRzjN$JRXW0eHrJqgb7qP5LkuGtlKVKXH2Py3QAZHxjnMrUm4=', '2025-03-21 04:29:26.320222', 0, 'cityhospital', 'City Hospital', '', 'cityhospital@gmail.com', 0, 1, '2024-02-11 09:55:12.000000'),
+(10, 'pbkdf2_sha256$600000$q25H0SydrjuaCdO6VKcPvd$NWPDJez0nAk07QMHefMG61XEQGYDKp6q32i8Atx+VR4=', '2024-02-11 10:51:47.000000', 0, 'cityhospital', 'City Hospital', '', 'cityhospital@gmail.com', 0, 1, '2024-02-11 09:55:12.000000'),
 (11, 'pbkdf2_sha256$870000$mR83ZlT9X9UUnv4esOFiRo$f0v2jRC3i5qoe/RATLx953tRR9UTvHtKQrS85CZC+yc=', '2025-02-21 15:23:49.903688', 0, 'admin1', 'Shvet', 'patel', 'shvet@gmail.com', 0, 1, '2024-09-29 11:40:41.000000'),
-(12, 'pbkdf2_sha256$870000$fjtx5iGJCpcM5SUJmvQWeN$fj9qgWbLLF+RPBeqosKaop+MsHv7qoFnCmSsRRGE4sE=', '2025-03-19 11:24:42.000000', 0, 'hospital1', 'Nootan General Hospital', '', 'NootanHospital@gmail.com', 1, 0, '2024-09-29 11:54:19.000000'),
-(18, 'pbkdf2_sha256$870000$6Tvqf6R7Mbque4EXroJQw5$uRQ2kTGXalymcWzr22iwzxs3gGxy+h5Rw/5VBdbK3u4=', '2025-03-21 04:28:23.704670', 0, 'ved001', 'ved', 'patel', 'ved@gmail.com', 0, 1, '2025-02-21 12:09:14.806255'),
-(19, 'pbkdf2_sha256$870000$NviyE90jOzMJBzzbk5OqOe$BuM8NeyhvrWuhRJhDri+lBrMJKWNggM7zk4FFaqf4vc=', NULL, 0, 'hospital3', 'Drashti Gynec & Dental Hospital - IVF & Laparoscopic Centre', '', 'DentalHospital@gmail.com', 0, 1, '2025-03-19 11:29:44.575685');
+(12, 'pbkdf2_sha256$720000$xq2rn07iQ60QflnqLcKt1F$DvYa9E7zSFNDpx+95tSCLcnLGuQZeG1c5EdYWuXiWFI=', '2024-09-29 11:58:16.511021', 0, 'hospital1', 'Nootan General Hospital', '', 'NootanHospital@gmail.com', 0, 1, '2024-09-29 11:54:19.939239'),
+(16, 'pbkdf2_sha256$870000$AGkBtb61ofHPGnBMYbGw9S$6pMaL24P2kQFa1t19tZ+xQ9cYK3FlJ0qNE9fApscvac=', '2025-02-21 10:04:30.000000', 1, 'hospital2', 'VADNAGAR HOSPITAL', '', 'VADNAGAR@gmail.com', 1, 1, '2025-02-21 10:04:19.000000'),
+(18, 'pbkdf2_sha256$870000$6Tvqf6R7Mbque4EXroJQw5$uRQ2kTGXalymcWzr22iwzxs3gGxy+h5Rw/5VBdbK3u4=', NULL, 0, 'ved001', 'ved', 'patel', 'ved@gmail.com', 0, 1, '2025-02-21 12:09:14.806255');
 
 -- --------------------------------------------------------
 
@@ -194,13 +194,9 @@ CREATE TABLE `childvc_appointment` (
 
 INSERT INTO `childvc_appointment` (`aid`, `datetime`, `status`, `created_at`, `hospital_id`, `user_id`, `vac_id`) VALUES
 (1, '2024-02-29 18:00:00.000000', 'Pending', '2024-02-11 10:27:13.968333', 10, 8, 3),
-(2, '2024-09-30 11:31:00.000000', 'Completed', '2024-09-29 11:55:10.098265', 12, 11, 2),
+(2, '2024-09-30 11:31:00.000000', 'Approved', '2024-09-29 11:55:10.098265', 12, 11, 2),
 (3, '2025-02-18 15:47:55.000000', 'Approved', '2025-02-18 15:48:18.329862', 10, 10, 2),
-(5, '2025-02-25 23:29:00.000000', 'Approved', '2025-02-21 12:54:30.651288', 10, 11, 14),
-(6, '2025-03-20 18:29:00.000000', 'Completed', '2025-03-19 08:55:13.847868', 12, 18, 15),
-(7, '2025-03-19 05:11:00.000000', 'Approved', '2025-03-19 09:39:12.868213', 12, 18, 1),
-(8, '2025-03-22 20:13:00.000000', 'Pending', '2025-03-19 09:39:39.722484', 12, 18, 12),
-(9, '2025-03-22 13:03:00.000000', 'Pending', '2025-03-21 04:30:01.579234', 10, 18, 9);
+(5, '2025-02-25 23:29:00.000000', 'Approved', '2025-02-21 12:54:30.651288', 10, 11, 14);
 
 -- --------------------------------------------------------
 
@@ -209,7 +205,7 @@ INSERT INTO `childvc_appointment` (`aid`, `datetime`, `status`, `created_at`, `h
 --
 
 CREATE TABLE `childvc_contact` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `phone` bigint(20) NOT NULL,
@@ -279,9 +275,9 @@ INSERT INTO `childvc_profile` (`profile_id`, `profile_image`, `address`, `phone`
 (3, '2_img_TUp6rqL.jpg', 'Surat', 827628347, 8, '1', NULL),
 (5, 'img3.png', '', NULL, 10, '2', NULL),
 (6, 'img3.png', '', 9023751034, 11, '1', '2003-09-11'),
-(7, 'Hospital1_cx1k5kr.jfif', 'Plot No, 1A, Gandhinagar - Ahmedabad Rd, GIDC Bhat, \r\nestate, Ahmedabad, Gujarat 382428', 2288339955, 12, '2', '2025-03-19'),
-(16, '6_img_giVX5Ib.jpg', 'vadnagar', 9023751034, 18, '1', '1911-01-03'),
-(18, 'img3.png', '', NULL, 19, '1', NULL);
+(7, 'img3.png', '', NULL, 12, '2', NULL),
+(12, 'img3.png', '', 9023751034, 16, '1', '2024-09-24'),
+(16, '2_img_ft9coJp.jpg', 'vadnagar', 9023751034, 18, '1', '1911-01-03');
 
 -- --------------------------------------------------------
 
@@ -290,7 +286,7 @@ INSERT INTO `childvc_profile` (`profile_id`, `profile_image`, `address`, `phone`
 --
 
 CREATE TABLE `childvc_vaccinationrecord` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `child_name` varchar(100) NOT NULL,
   `vaccine_name` varchar(100) NOT NULL,
   `status` varchar(20) NOT NULL,
@@ -396,13 +392,7 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 (55, '2025-02-21 12:46:16.802717', '14', 'HPV (2 doses)', 1, '[{\"added\": {}}]', 9, 6),
 (56, '2025-02-21 12:46:33.573114', '15', 'Tdap/ Td', 1, '[{\"added\": {}}]', 9, 6),
 (57, '2025-02-21 12:46:50.564117', '16', 'Annual Influenza Vaccine', 1, '[{\"added\": {}}]', 9, 6),
-(58, '2025-02-21 15:24:34.780394', '5', 'admin1', 2, '[{\"changed\": {\"fields\": [\"Hospital\", \"Status\"]}}]', 12, 6),
-(59, '2025-03-19 09:06:01.364992', '6', 'ved001', 2, '[{\"changed\": {\"fields\": [\"Status\"]}}]', 12, 6),
-(60, '2025-03-19 09:32:54.368809', '7', 'hospital1', 2, '[{\"changed\": {\"fields\": [\"Address\"]}}]', 11, 6),
-(61, '2025-03-19 09:36:04.910776', '6', 'ved001', 2, '[{\"changed\": {\"fields\": [\"Status\"]}}]', 12, 6),
-(62, '2025-03-19 11:29:17.809247', '16', 'hospital2', 3, '', 4, 6),
-(63, '2025-03-19 11:30:08.982853', '12', 'hospital1', 2, '[{\"changed\": {\"fields\": [\"Active\", \"Staff status\"]}}]', 4, 6),
-(64, '2025-03-19 11:30:26.263077', '7', 'hospital1', 2, '[{\"changed\": {\"fields\": [\"Bdate\"]}}]', 11, 6);
+(58, '2025-02-21 15:24:34.780394', '5', 'admin1', 2, '[{\"changed\": {\"fields\": [\"Hospital\", \"Status\"]}}]', 12, 6);
 
 -- --------------------------------------------------------
 
@@ -491,8 +481,7 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (36, 'childvc', '0016_appointment_vac', '2024-02-11 09:58:54.596168'),
 (37, 'childvc', '0017_vaccine_vprice_alter_appointment_datetime', '2024-09-29 11:38:49.266283'),
 (38, 'childvc', '0018_vaccinationrecord', '2025-02-21 09:46:51.648659'),
-(39, 'childvc', '0019_profile_bdate_alter_profile_user', '2025-02-21 09:46:54.111643'),
-(40, 'childvc', '0020_alter_contact_id_alter_vaccinationrecord_id', '2025-03-19 09:04:12.931718');
+(39, 'childvc', '0019_profile_bdate_alter_profile_user', '2025-02-21 09:46:54.111643');
 
 -- --------------------------------------------------------
 
@@ -513,9 +502,6 @@ CREATE TABLE `django_session` (
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('0vokdggp27epflwu5lmc1cyo2e5wcrhe', '.eJxVjDsOwjAQBe_iGln-xD9Kes5grb1rHEC2FCcV4u4QKQW0b2bei0XY1hq3QUuckZ2ZZaffLUF-UNsB3qHdOs-9rcuc-K7wgw5-7UjPy-H-HVQY9VtrOWFImgK64sgIoAmEouIhQwlJWmE8KUJvQTujQBEFL7UXTgrKSbH3B_wKODQ:1rZ6QV:sDfmJmC0JVuD48K8oO0HqaYTHdEBfmliDkYnl2Qq39U', '2024-02-25 09:47:07.289049'),
 ('2tma8cmrd7w2cszxratihojmx30txyom', '.eJxVjDsOwjAUBO_iGlkvxp-Ykj5nsLx2Hg4gR4qTCnF3iJQC2p2ZfYkQt7WErY1LmLK4CCVOvxtieox1B_ke622Waa7rMkHuijxok8Ocx-f1cP8OSmzlW5seLlsmRd4zzkQ-Je6iNujYKgcN1yuCMRqsmYyy5PrkGBkMQIn3B9taOCg:1rHj7O:HF9tOU5bZ2agxv_nuGePlNGr-Q4TdDxVhN6VvzfXifo', '2024-01-08 11:27:34.038090'),
-('75a6ds3gdr570wic63o8et09k7jb02vq', '.eJxVjDsOwyAQRO9CHaGFtfmkTO8zIMxCcBKBZOwqyt1jJBeJpnvzZt7M-X3Lbm9xdQuxKxPALr9w9uEZS2_o4cu98lDLti4z7wo_28anSvF1O92_g-xbPtZmtEYAaaFSsuRFRIWjkdZrSINBHSQcYEialACNQSIEQIuJekxiny_Y7jdV:1tvU0c:Jp8PFPvm5G146SHkj9IB6soTE_2miG_dCESkSPiSMDo', '2025-04-04 04:29:26.361202'),
-('eprq3y78oxyje0oxeut4mhb7k5rol02i', '.eJxVjEEOwiAQRe_C2pBKKTgu3fcMhGFmpGogKe3KeHdD0oVu_3vvv1WI-5bD3ngNC6mrcur0u2FMTy4d0COWe9Wplm1dUHdFH7TpuRK_bof7d5Bjy712Ft3IdjJA3rpJRIxnZ852lIQRSThZAGcEcOAR0QtcgAYCI4lI1OcL-ek5Gg:1tupB9:wgPCL25y5CHX6kbPsI65U54n-jhkXhOe-PwS6h9RDQ0', '2025-04-02 08:53:35.646700'),
-('h4wj4as707w1hsfpg1pkjap7857q9ibd', '.eJxVjEEOwiAQRe_C2pBSBhhcuvcMDZ0ZpGpKUtqV8e7apAvd_vfef6khbWsZtibLMLE6K4Pq9DuOiR4y74Tvab5VTXVel2nUu6IP2vS1sjwvh_t3UFIr37pjIDQcQoAOhUDQkLUhZyBDgOiddywxZ_QjR47RgmNHYFh6B31S7w8EuDf-:1tvTzb:X3I1wcDw4EY0KzCGzYj1S0KQFcwFVxbv5zV2RU5ltks', '2025-04-04 04:28:23.802052'),
 ('nad2g9iqe4hp65zfrkqlpgkvdszhfrsq', '.eJxVjDsOwjAYg--SGUV5tInKyM4Zov8VUkCp1LRTxd1ppQ5gefJne1MJ1qWktcmcRlZXZXt1-Q0R6CX1IPyE-pg0TXWZR9RHRZ-06fvE8r6d3b-DAq3sa_Rd9MQxB_bCzlncFYgpGrPbR8NxQONBcm_BQEZiH4FCJ24Q7NTnCyTIOQM:1tlPes:lOr2hAS3_yJrriMT8NvJuvIGWl6NMtuGhdogpKxqnT0', '2025-03-07 09:49:22.481980'),
 ('os00w456jj96oddlkupyxysfuqfppbxm', '.eJxVjDsOwjAQBe_iGllr4ngTSvqcIfJ-jAPIlvKpEHeHSCmgfTPzXmaM25rHbdF5nMRcjPPm9DtS5IeWncg9llu1XMs6T2R3xR50sUMVfV4P9-8gxyV_a_ZdEnDaBi-RQujYIUTokantGEShwaCKhNooOAZK0vRnZNcmcpjM-wMWnziP:1tlPfh:ZQvjxFtrwR3pxM3omMS87ySNpmGDFGATkEa_5I7OIYc', '2025-03-07 09:50:13.999117'),
 ('p5ofd2gwd5c3xtyx7wnyecc1bmdmoeis', '.eJxVjEEOwiAQRe_C2hCglAGX7j1DM8wMtmpoUtqV8e7apAvd_vfef6kBt3UctibLMLE6K2vV6XfMSA-pO-E71tusaa7rMmW9K_qgTV9nluflcP8ORmzjt0ZfiAvZXpwvHQQfgJPkmCkXA2B6gtJxMNYHAYwpicMYjeHgUvIdqfcHIf04HA:1tl3e9:9FEHokrYM1j2vlGJg8yzQWTCoOp8NpT0eBAntGFYzp0', '2025-03-06 10:19:09.076725'),
@@ -698,7 +684,7 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `auth_user_groups`
@@ -716,13 +702,13 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT for table `childvc_appointment`
 --
 ALTER TABLE `childvc_appointment`
-  MODIFY `aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `childvc_contact`
 --
 ALTER TABLE `childvc_contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `childvc_faq`
@@ -734,13 +720,13 @@ ALTER TABLE `childvc_faq`
 -- AUTO_INCREMENT for table `childvc_profile`
 --
 ALTER TABLE `childvc_profile`
-  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `childvc_vaccinationrecord`
 --
 ALTER TABLE `childvc_vaccinationrecord`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `childvc_vaccine`
@@ -752,7 +738,7 @@ ALTER TABLE `childvc_vaccine`
 -- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `django_content_type`
@@ -764,7 +750,7 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `student`

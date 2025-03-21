@@ -52,6 +52,7 @@ This system allows hospitals to manage child vaccination records and parents to 
    pip install crispy-bootstrap4
    pip install django-allauth
    pip install django-environ
+   pip install mysqlclient
    ```
 
 5. Install static files:
@@ -71,6 +72,7 @@ django-crispy-forms>=1.14.0
 crispy-bootstrap4>=1.0.0
 django-allauth>=0.45.0
 django-environ>=0.8.1
+mysqlclient>=2.0.0
 ```
 
 ## Project Structure
