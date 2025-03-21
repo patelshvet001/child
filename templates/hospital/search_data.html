@@ -9,6 +9,11 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
+<!-- Add these new library imports -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
 <style>
 .search-container {
     background: #ffffff;
@@ -130,12 +135,12 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="search-title mb-0">Vaccination Data Search</h2>
                 <div class="export-buttons">
-                    <button class="btn btn-success" onclick="exportToExcel()">
+                    <a href="?export_type=excel{% for key, value in request.GET.items %}{% if key != 'export_type' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="btn btn-success">
                         <i class="fas fa-file-excel me-2"></i>Export to Excel
-                    </button>
-                    <button class="btn btn-danger" onclick="exportToPDF()">
+                    </a>
+                    <a href="?export_type=pdf{% for key, value in request.GET.items %}{% if key != 'export_type' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="btn btn-danger">
                         <i class="fas fa-file-pdf me-2"></i>Export to PDF
-                    </button>
+                    </a>
                 </div>
             </div>
             
@@ -276,60 +281,7 @@
 {% endblock body %}
 
 {% block extra_js %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-
 <script>
-$(document).ready(function() {
-    // Export functions
-    window.exportToExcel = function() {
-        const table = document.querySelector('.table');
-        const ws = XLSX.utils.table_to_sheet(table);
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'Vaccination Data');
-        const filename = `vaccination_data_${new Date().toISOString().slice(0,10)}.xlsx`;
-        XLSX.writeFile(wb, filename);
-    }
-
-    window.exportToPDF = function() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        
-        doc.setFontSize(16);
-        doc.text('Vaccination Data Report', 15, 15);
-        
-        doc.setFontSize(12);
-        doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 15, 25);
-        
-        const table = document.querySelector('.table');
-        const rows = Array.from(table.querySelectorAll('tr'));
-        
-        let yPos = 35;
-        const cellWidth = 25;
-        
-        doc.setFontSize(10);
-        doc.setFont(undefined, 'bold');
-        const headers = Array.from(rows[0].querySelectorAll('th')).map(th => th.textContent);
-        headers.forEach((header, index) => {
-            doc.text(header, 15 + (index * cellWidth), yPos);
-        });
-        
-        doc.setFont(undefined, 'normal');
-        rows.slice(1).forEach(row => {
-            yPos += 10;
-            if (yPos >= 280) {
-                doc.addPage();
-                yPos = 20;
-            }
-            const cells = Array.from(row.querySelectorAll('td')).map(td => td.textContent.trim());
-            cells.forEach((cell, index) => {
-                doc.text(cell, 15 + (index * cellWidth), yPos);
-            });
-        });
-        
-        const filename = `vaccination_data_${new Date().toISOString().slice(0,10)}.pdf`;
-        doc.save(filename);
-    }
-});
+// Remove the old JavaScript export functions since we're using server-side exports now
 </script>
 {% endblock %} 

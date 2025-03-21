@@ -3,7 +3,7 @@ from django.contrib import messages
 from childvc.models import Contact,Profile,Appointment 
 from django.contrib.auth.models import User,auth
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
@@ -14,6 +14,16 @@ from django.template import RequestContext
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from childvc.decorators import hospital_required
+import xlsxwriter
+from io import BytesIO
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import inch
+from reportlab.platypus import Paragraph
+import io
+from datetime import datetime
 
 
 @hospital_required
@@ -289,6 +299,11 @@ def search_data(request):
         elif sort_by == 'name_asc':
             appointments = appointments.order_by('user__first_name', 'user__last_name')
 
+        # Handle export requests
+        export_type = request.GET.get('export_type')
+        if export_type in ['excel', 'pdf']:
+            return export_data(appointments, export_type)
+
     # Calculate statistics
     total_appointments = appointments.count()
     completed_appointments = appointments.filter(status='Completed').count()
@@ -305,6 +320,117 @@ def search_data(request):
     }
 
     return render(request, 'hospital/search_data.html', context)
+
+def export_data(appointments, export_type):
+    if export_type == 'excel':
+        return export_to_excel(appointments)
+    elif export_type == 'pdf':
+        return export_to_pdf(appointments)
+
+def export_to_excel(appointments):
+    output = BytesIO()
+    workbook = xlsxwriter.Workbook(output)
+    worksheet = workbook.add_worksheet('Vaccination Data')
+
+    # Define formats
+    header_format = workbook.add_format({
+        'bold': True,
+        'bg_color': '#3498db',
+        'font_color': 'white',
+        'border': 1
+    })
+    cell_format = workbook.add_format({
+        'border': 1,
+        'text_wrap': True
+    })
+
+    # Write headers
+    headers = ['Patient Name', 'Vaccine Type', 'Appointment Date', 'Duration', 'Status', 'Hospital', 'Price']
+    for col, header in enumerate(headers):
+        worksheet.write(0, col, header, header_format)
+        worksheet.set_column(col, col, 15)
+
+    # Write data
+    for row, appointment in enumerate(appointments, start=1):
+        worksheet.write(row, 0, f"{appointment.user.first_name} {appointment.user.last_name}", cell_format)
+        worksheet.write(row, 1, appointment.vac.vname, cell_format)
+        worksheet.write(row, 2, appointment.datetime.strftime('%d %b %Y'), cell_format)
+        worksheet.write(row, 3, appointment.vac.vdiscription, cell_format)
+        worksheet.write(row, 4, appointment.status, cell_format)
+        worksheet.write(row, 5, appointment.hospital.first_name, cell_format)
+        worksheet.write(row, 6, f"₹{appointment.vac.vprice}", cell_format)
+
+    workbook.close()
+    output.seek(0)
+
+    response = HttpResponse(
+        output.read(),
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    response['Content-Disposition'] = f'attachment; filename="vaccination_data_{datetime.now().strftime("%Y%m%d")}.xlsx"'
+    return response
+
+def export_to_pdf(appointments):
+    buffer = io.BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=letter)
+    elements = []
+
+    # Add title
+    styles = getSampleStyleSheet()
+    title_style = ParagraphStyle(
+        'CustomTitle',
+        parent=styles['Heading1'],
+        fontSize=16,
+        spaceAfter=30
+    )
+    elements.append(Paragraph('Vaccination Data Report', title_style))
+
+    # Add date
+    date_style = ParagraphStyle(
+        'CustomDate',
+        parent=styles['Normal'],
+        fontSize=12,
+        spaceAfter=30
+    )
+    elements.append(Paragraph(f'Generated on: {datetime.now().strftime("%d %b %Y")}', date_style))
+
+    # Prepare table data
+    data = [['Patient Name', 'Vaccine Type', 'Appointment Date', 'Duration', 'Status', 'Hospital', 'Price']]
+    for appointment in appointments:
+        data.append([
+            f"{appointment.user.first_name} {appointment.user.last_name}",
+            appointment.vac.vname,
+            appointment.datetime.strftime('%d %b %Y'),
+            appointment.vac.vdiscription,
+            appointment.status,
+            appointment.hospital.first_name,
+            f"₹{appointment.vac.vprice}"
+        ])
+
+    # Create table
+    table = Table(data)
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#3498db')),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, 0), 12),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.white),
+        ('TEXTCOLOR', (0, 1), (-1, -1), colors.black),
+        ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+        ('FONTSIZE', (0, 1), (-1, -1), 10),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+    ]))
+
+    elements.append(table)
+    doc.build(elements)
+
+    response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="vaccination_data_{datetime.now().strftime("%Y%m%d")}.pdf"'
+    return response
 
 
 
