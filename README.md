@@ -72,6 +72,7 @@ This system allows hospitals to manage child vaccination records and parents to 
    pip install crispy-bootstrap4
    pip install django-allauth
    pip install django-environ
+   pip install mysqlclient
    pip install xlsxwriter
    pip install reportlab
    ```
