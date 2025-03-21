@@ -74,14 +74,30 @@ source venv/bin/activate
 ```
 
 ### 3. Dependencies Installation
-```bash
-# Install from requirements.txt
-pip install -r requirements.txt
 
-# Install additional packages
-pip install django Pillow reportlab qrcode python-dateutil
-pip install django-crispy-forms crispy-bootstrap4 django-allauth
-pip install django-environ xlsxwriter reportlab
+#### Important: Install these packages first
+```bash
+# Core Django and essential packages
+pip install django
+pip install Pillow
+pip install reportlab
+pip install qrcode
+pip install python-dateutil
+
+# Django extensions and forms
+pip install django-crispy-forms
+pip install crispy-bootstrap4
+pip install django-allauth
+pip install django-environ
+
+# Export functionality packages
+pip install xlsxwriter
+pip install reportlab
+```
+
+#### Alternative: Install from requirements.txt
+```bash
+pip install -r requirements.txt
 ```
 
 ### 4. Static Files
