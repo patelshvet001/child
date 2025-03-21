@@ -10,13 +10,13 @@ This system allows hospitals to manage child vaccination records and parents to 
 
 - 👥 User Authentication (Hospital and Patient accounts)
 - 📅 Appointment Scheduling
-- 📊 Vaccination Record Management
+- 📝 Vaccination Record Management
 - 📜 Digital Certificate Generation with QR Code
 - 👤 Profile Management
 - ❓ FAQ Section
 - 🔑 Password Reset Functionality
 - 🔍 Advanced Search and Filtering
-- 📤 Data Export (Excel and PDF)
+- 📊 Data Export (Excel and PDF)
 - 📈 Real-time Statistics Dashboard
 
 ## ⚙️ Prerequisites
@@ -117,14 +117,14 @@ This system allows hospitals to manage child vaccination records and parents to 
    - 💉 Filter by vaccine type
    - 📊 Filter by appointment status
    - 📅 Filter by date range
-   - 📤 Export data to Excel or PDF
+   - 📥 Export data to Excel or PDF
    - 📈 View real-time statistics
 
-## 📤 Export Functionality
+## 📊 Export Functionality
 
 The system provides two types of data export:
 
-1. 📊 Excel Export:
+1. 📈 Excel Export:
    - Click the "Export to Excel" button
    - Downloads an Excel file with all vaccination data
    - Includes proper formatting and column headers
