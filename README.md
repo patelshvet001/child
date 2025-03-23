@@ -93,6 +93,8 @@ pip install django-environ
 # Export functionality packages
 pip install xlsxwriter
 pip install reportlab
+
+pip install mysqlclient
 ```
 
 #### Alternative: Install from requirements.txt
